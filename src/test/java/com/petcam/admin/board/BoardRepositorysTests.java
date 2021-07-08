@@ -1,7 +1,7 @@
 package com.petcam.admin.board;
 
 import com.petcam.admin.entity.board.Board;
-import com.petcam.admin.repository.board.BoardRepository;
+import com.petcam.admin.repository.board.BoardRepositorys;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,58 +17,56 @@ import java.util.stream.IntStream;
 @SpringBootTest
 @Log4j2
 @ActiveProfiles("dev")
-public class BoardRepositoryTests {
+public class BoardRepositorysTests {
 
     @Autowired
-    BoardRepository boardRepository;
+    BoardRepositorys boardRepositorys;
 
     @Test
     public void testInsert() {
 
-        double randomHit = (Math.random() * 1000) + 1;
-        Long randomHitLong = (new Double(randomHit)).longValue();
-
-        IntStream.rangeClosed(1,10000).forEach(i -> {
+        IntStream.rangeClosed(1, 5000).forEach(i -> {
+            long randomHit = (int)(Math.random() * 1000 + 1);
             Board board = Board.builder()
                     .type(1L)
                     .category("공지사항"+i)
                     .title("제목"+i)
                     .content("내용"+i)
                     .writer("관리자")
-                    .hit(randomHitLong)
+                    .hit(randomHit)
                     .build();
 
-            boardRepository.save(board);
+            boardRepositorys.save(board);
         });
     }
 
     @Test
     public void testSelect() {
 
-        Optional<Board> result = boardRepository.findById(2L);
+        Optional<Board> result = boardRepositorys.findById(2L);
         log.info(result);
 
     }
 
     @Test
     public void testDelete() {
-        boardRepository.deleteById(100L);
+        boardRepositorys.deleteById(100L);
     }
 
     @Test
     public void testUpdate() {
 
-        Optional<Board> result = boardRepository.findById(2L);
+        Optional<Board> result = boardRepositorys.findById(2L);
         result.ifPresent(board -> {
             board.changeTitle("업데이트테스트");
-            boardRepository.save(board);
+            boardRepositorys.save(board);
         });
     }
 
     @Test
     public void testPaging() {
         Pageable pageable = PageRequest.of(2, 15);
-        Page<Board> result = boardRepository.findAll(pageable);
+        Page<Board> result = boardRepositorys.findAll(pageable);
 
         result.getContent().forEach(board -> {
            log.info(board);
@@ -81,7 +79,7 @@ public class BoardRepositoryTests {
         String keyword = "바보";
 
         Pageable pageable = PageRequest.of(0, 10);
-        Page<Board> result = boardRepository.KeywordSearch(keyword, pageable);
+        Page<Board> result = boardRepositorys.KeywordSearch(keyword, pageable);
         result.getContent().forEach(board -> {
             log.info(board);
         });

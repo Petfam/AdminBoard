@@ -10,7 +10,7 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Table(name = "board")
+@Table(name = "admin_board")
 @ToString
 public class Board extends BaseEntity {
 
@@ -29,7 +29,6 @@ public class Board extends BaseEntity {
     private String writer;
 
     private Long hit;
-
 
     public void changeTitle(String title) {
         this.title = title;
