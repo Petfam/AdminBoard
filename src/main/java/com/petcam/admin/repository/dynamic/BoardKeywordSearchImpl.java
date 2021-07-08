@@ -1,7 +1,7 @@
 package com.petcam.admin.repository.dynamic;
 
 import com.petcam.admin.entity.board.Board;
-import com.petcam.admin.entity.QBoard;
+import com.petcam.admin.entity.board.QBoard;
 import com.querydsl.jpa.JPQLQuery;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
