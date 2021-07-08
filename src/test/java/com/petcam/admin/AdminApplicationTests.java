@@ -10,9 +10,4 @@ class AdminApplicationTests {
     void contextLoads() {
     }
 
-    @Test
-    void dldkdk(){
-        
-    }
-
 }
