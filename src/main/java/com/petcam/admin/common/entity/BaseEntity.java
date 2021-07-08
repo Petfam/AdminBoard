@@ -1,4 +1,4 @@
-package com.petcam.admin.common;
+package com.petcam.admin.common.entity;
 
 import lombok.Getter;
 import org.springframework.data.annotation.CreatedDate;

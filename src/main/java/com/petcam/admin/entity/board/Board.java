@@ -1,6 +1,6 @@
 package com.petcam.admin.entity.board;
 
-import com.petcam.admin.common.BaseEntity;
+import com.petcam.admin.common.entity.BaseEntity;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,7 +18,7 @@ public class Board extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long bno;
 
-    private Long type;
+    private String type;
 
     private String category;
 

@@ -22,13 +22,34 @@ public class BoardRepositorysTests {
     @Autowired
     BoardRepositorys boardRepositorys;
 
+    //제목, 내용, 작성자, 게시판 타입을 통해 페이징 처리 된 게시물 목록 및 댓글 갯수 호출
+    @Test
+    public void testGetBoardTotalList() {
+
+        String type = "N";
+        String keyword = "";
+        String category = "C";
+
+        Pageable pageable = PageRequest.of(0, 15);
+
+        Page<Object[]> result = boardRepositorys.getBoardTotalList(type, keyword, category, pageable);
+
+        log.info("result: "+result);
+        log.info("result count: "+result.getTotalElements());
+
+        result.getContent().forEach(objects -> {
+            log.info("result inside: "+objects[0]);
+            log.info("result reply: "+objects[1]);
+        });
+    }
+
     @Test
     public void testInsert() {
 
         IntStream.rangeClosed(1, 5000).forEach(i -> {
             long randomHit = (int)(Math.random() * 1000 + 1);
             Board board = Board.builder()
-                    .type(1L)
+                    .type("N")
                     .category("공지사항"+i)
                     .title("제목"+i)
                     .content("내용"+i)

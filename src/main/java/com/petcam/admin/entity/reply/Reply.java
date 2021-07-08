@@ -1,6 +1,6 @@
 package com.petcam.admin.entity.reply;
 
-import com.petcam.admin.common.BaseEntity;
+import com.petcam.admin.common.entity.BaseEntity;
 import com.petcam.admin.entity.board.Board;
 import lombok.*;
 
