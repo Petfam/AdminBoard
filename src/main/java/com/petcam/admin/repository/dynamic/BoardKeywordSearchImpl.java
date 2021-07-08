@@ -1,7 +1,7 @@
 package com.petcam.admin.repository.dynamic;
 
 import com.petcam.admin.entity.board.Board;
-import com.petcam.admin.entity.QBoard;
+import com.petcam.admin.entity.board.QBoard;
 import com.querydsl.jpa.JPQLQuery;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -22,9 +22,9 @@ public class BoardKeywordSearchImpl extends QuerydslRepositorySupport implements
     public Page<Board> KeywordSearch(String keyword, Pageable pageable) {
         QBoard board = QBoard.board;
         JPQLQuery<Board> query = from(board);
-
+        //select * from board;
         if(keyword != null && keyword.trim().length() != 0) {
-            query.where(board.content.contains(keyword));
+            query.where(board.content.contains(keyword)); //where board.content = keyword
         }
 
         query.where(board.bno.gt(0));
