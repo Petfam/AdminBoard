@@ -1,4 +1,4 @@
-package com.petcam.admin.dto;
+package com.petcam.admin.dto.upload;
 
 import lombok.*;
 

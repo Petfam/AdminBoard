@@ -1,6 +1,6 @@
 package com.petcam.admin.controller.upload;
 
-import com.petcam.admin.dto.UploadResultDTO;
+import com.petcam.admin.dto.upload.UploadResultDTO;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -25,7 +25,7 @@ import java.util.UUID;
 @Log4j2
 public class UploadController {
 
-    @Value("C:\\ztemp")
+    @Value("C:\\Users\\AIA")
     private String path;
 
     //
