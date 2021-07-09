@@ -2,8 +2,10 @@ package com.petcam.admin.service;
 
 import com.petcam.admin.common.dto.ListResponseDTO;
 import com.petcam.admin.common.dto.PagingDTO;
+import com.petcam.admin.dto.board.BoardInsertRequestDTO;
 import com.petcam.admin.dto.board.BoardListDTO;
 import com.petcam.admin.dto.board.BoardListRequestDTO;
+import com.petcam.admin.entity.board.Board;
 import com.petcam.admin.repository.board.BoardRepositorys;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -42,4 +44,5 @@ public class BoardServiceImpl implements BoardService {
                 .build();
 
     }
+
 }
