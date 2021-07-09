@@ -51,4 +51,5 @@ public interface BoardService {
     }
 
 
+    Long boardRegister(BoardDTO dto);
 }

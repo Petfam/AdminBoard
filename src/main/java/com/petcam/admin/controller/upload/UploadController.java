@@ -1,7 +1,11 @@
 package com.petcam.admin.controller.upload;
 
+import com.petcam.admin.dto.board.BoardDTO;
+import com.petcam.admin.dto.board.BoardImageDTO;
 import com.petcam.admin.dto.upload.AdminDTO;
 import com.petcam.admin.dto.upload.UploadResultDTO;
+import com.petcam.admin.service.BoardService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.MediaType;
@@ -24,7 +28,10 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/file")
 @Log4j2
+@RequiredArgsConstructor
 public class UploadController {
+
+    private final BoardService boardService;
 
     @Value("C:\\Users\\AIA")
     private String path;
@@ -110,14 +117,19 @@ public class UploadController {
 
 
     @PostMapping("/")
-    public ResponseEntity<Long> BoardRegister(@RequestBody AdminDTO dto) {
-        log.info(dto);
+    public ResponseEntity<Long> BoardRegister(@RequestBody BoardDTO dto) {
+        log.info(dto +"넘어온디티오값");
 
+        Long fno = boardService.boardRegister(dto);
 
-
-
-
-
-        return null;
+        return ResponseEntity.ok(fno);
     }
+
+//    @GetMapping("/getList")
+//    public ResponseEntity<List<BoardImageDTO>> getList() {
+//
+//        boardService.getList();
+//
+//        return   ResponseEntity.ok(boardService.getList());
+//    }
 }
