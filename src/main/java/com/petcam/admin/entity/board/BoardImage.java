@@ -16,7 +16,6 @@ import java.util.stream.Collectors;
 public class BoardImage {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String uuid;
 
     private String fileName;

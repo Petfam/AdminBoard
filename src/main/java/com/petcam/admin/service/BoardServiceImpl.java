@@ -2,6 +2,7 @@ package com.petcam.admin.service;
 
 import com.petcam.admin.common.dto.ListResponseDTO;
 import com.petcam.admin.common.dto.PagingDTO;
+import com.petcam.admin.dto.board.BoardDTO;
 import com.petcam.admin.dto.board.BoardInsertRequestDTO;
 import com.petcam.admin.dto.board.BoardListDTO;
 import com.petcam.admin.dto.board.BoardListRequestDTO;
@@ -43,6 +44,15 @@ public class BoardServiceImpl implements BoardService {
                 .listRequestDTO(null)
                 .build();
 
+    }
+
+    @Override
+    public Long boardRegister(BoardDTO dto) {
+        Board entity = dtoToEntity(dto);
+
+        Board result = boardRepositorys.save(entity);
+
+        return result.getBno();
     }
 
 }
