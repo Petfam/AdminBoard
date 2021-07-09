@@ -7,7 +7,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
-import java.util.Set;
 
 @Data
 @Builder
@@ -23,6 +22,6 @@ public class BoardInsertRequestDTO {
 
     private String writer;
 
-    private Set<BoardImage> boardImages;
+    private List<BoardImageDTO> boardDTOImages;
 
 }

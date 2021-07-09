@@ -34,13 +34,13 @@ public class BoardRepositorysTests {
     public void insert() {
 
         BoardImage img = BoardImage.builder()
-                .uuid("880")
+                .uuid("1")
                 .filename("456")
                 .main(false)
                 .build();
 
         BoardImage img2 = BoardImage.builder()
-                .uuid("456")
+                .uuid("2")
                 .filename("456")
                 .main(false)
                 .build();

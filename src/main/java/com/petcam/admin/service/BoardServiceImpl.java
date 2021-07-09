@@ -27,17 +27,14 @@ public class BoardServiceImpl implements BoardService {
 
     private final BoardRepositorys boardRepositorys;
 
+    @Override
     public Long boardInsert(BoardInsertRequestDTO requestDTO) {
 
         log.info("======================== boardInsert Start");
 
-        Board board = Board.builder()
-                .type("N")
-                .title(requestDTO.getTitle())
-                .content(requestDTO.getContent())
-                .writer(requestDTO.getWriter())
-                .boardImages(requestDTO.getBoardImages())
-                .build();
+        Board board = dtoToEntityForInsert(requestDTO);
+
+        log.info(board);
 
         boardRepositorys.save(board);
 
@@ -64,15 +61,6 @@ public class BoardServiceImpl implements BoardService {
                 .listRequestDTO(null)
                 .build();
 
-    }
-
-    @Override
-    public Long boardRegister(BoardDTO dto) {
-        Board entity = dtoToEntity(dto);
-
-        Board result = boardRepositorys.save(entity);
-
-        return result.getBno();
     }
 
 }

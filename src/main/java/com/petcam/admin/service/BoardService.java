@@ -6,10 +6,11 @@ import com.petcam.admin.dto.board.BoardInsertRequestDTO;
 import com.petcam.admin.dto.board.BoardListDTO;
 import com.petcam.admin.dto.board.BoardListRequestDTO;
 import com.petcam.admin.entity.board.Board;
+import com.petcam.admin.entity.board.BoardImage;
 
 public interface BoardService {
 
-    
+    Long boardInsert(BoardInsertRequestDTO requestDTO);
 
     ListResponseDTO<BoardListDTO> getList(BoardListRequestDTO requestDTO);
 
@@ -39,7 +40,7 @@ public interface BoardService {
     }
 
     default Board dtoToEntity(BoardDTO dto) {
-        return Board.builder()
+        Board board =  Board.builder()
                 .bno(dto.getBno())
                 .type(dto.getType())
                 .category(dto.getType())
@@ -48,8 +49,35 @@ public interface BoardService {
                 .writer(dto.getWriter())
                 .hit(dto.getHit())
                 .build();
+
+        return board;
     }
 
+    default Board dtoToEntityForInsert(BoardInsertRequestDTO dto) {
+        Board board = Board.builder()
+                .type(dto.getType())
+                .category(dto.getType())
+                .title(dto.getTitle())
+                .content(dto.getContent())
+                .writer(dto.getWriter())
+                .build();
 
-    Long boardRegister(BoardDTO dto);
+        if(dto.getBoardDTOImages() != null) {
+
+            dto.getBoardDTOImages().forEach(boardImageDTO -> {
+                        BoardImage image = BoardImage.builder()
+                                .uuid(boardImageDTO.getUuid())
+                                .filename(boardImageDTO.getFilename())
+                                .main(boardImageDTO.isMain())
+                                .build();
+
+                        board.addImage(image);
+                    }
+            );
+
+        }
+
+        return board;
+    }
+
 }

@@ -2,6 +2,7 @@ package com.petcam.admin.controller.upload;
 
 import com.petcam.admin.dto.board.BoardDTO;
 import com.petcam.admin.dto.board.BoardImageDTO;
+import com.petcam.admin.dto.board.BoardInsertRequestDTO;
 import com.petcam.admin.dto.upload.AdminDTO;
 import com.petcam.admin.dto.upload.UploadResultDTO;
 import com.petcam.admin.service.BoardService;
@@ -36,12 +37,9 @@ public class UploadController {
     @Value("C:\\Users\\AIA")
     private String path;
 
-
-
-
     @ResponseBody
     @GetMapping(value = "/down")
-    public ResponseEntity<byte[]> down(String file){
+    public ResponseEntity<byte[]> down(String file) {
 
         log.info("--------------------down: " + file);
 
@@ -51,8 +49,8 @@ public class UploadController {
         try {
             mimeType = Files.probeContentType(target.toPath());
 
-            if(mimeType.startsWith("image") == false){
-                mimeType ="application/octet-stream";
+            if (mimeType.startsWith("image") == false) {
+                mimeType = "application/octet-stream";
             }
 
             byte[] arr = FileCopyUtils.copyToByteArray(target);
@@ -67,23 +65,23 @@ public class UploadController {
     }
 
     @ResponseBody
-    @PostMapping(value ="/upload", produces = MediaType.APPLICATION_JSON_VALUE)
-    public List<UploadResultDTO> upload(MultipartFile[] files){
+    @PostMapping(value = "/upload", produces = MediaType.APPLICATION_JSON_VALUE)
+    public List<UploadResultDTO> upload(MultipartFile[] files) {
 
         log.warn(path);
         log.info("========컨트롤러들어옴");
 
         List<UploadResultDTO> result = new ArrayList<>(); // 새로운 값 들어오면 점점 늘어날 수 있게
 
-        for (MultipartFile file:files) {    // files에 있는 것 하나씩 꺼내담기
+        for (MultipartFile file : files) {    // files에 있는 것 하나씩 꺼내담기
             log.info("========포문들어옴");
             log.warn(file);
 
             String fileName = file.getOriginalFilename();   // 파일명 추출
             String uuid = UUID.randomUUID().toString();     // 랜덤값으로 매번 바뀌게
 
-            File outFile = new File(path, uuid+"_"+fileName );
-            File thumbFile = new File(path, "s_"+uuid+"_"+fileName );   //썸네일 파일경로
+            File outFile = new File(path, uuid + "_" + fileName);
+            File thumbFile = new File(path, "s_" + uuid + "_" + fileName);   //썸네일 파일경로
 
             try {
                 log.info("========트라이들어옴");
@@ -112,24 +110,5 @@ public class UploadController {
         return result;
     }
 
-
-
-
-
-    @PostMapping("/")
-    public ResponseEntity<Long> BoardRegister(@RequestBody BoardDTO dto) {
-        log.info(dto +"넘어온디티오값");
-
-        Long fno = boardService.boardRegister(dto);
-
-        return ResponseEntity.ok(fno);
-    }
-
-//    @GetMapping("/getList")
-//    public ResponseEntity<List<BoardImageDTO>> getList() {
-//
-//        boardService.getList();
-//
-//        return   ResponseEntity.ok(boardService.getList());
-//    }
 }
+
