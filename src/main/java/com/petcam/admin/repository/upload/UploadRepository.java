@@ -16,6 +16,4 @@ public interface UploadRepository extends JpaRepository<Board, Long> {
             "where bi.main=true and b.bno > 0 group by b")
     Page<Object[]> getBoardList(Pageable pageable);
 
-
-
 }
