@@ -2,11 +2,14 @@ package com.petcam.admin.service;
 
 import com.petcam.admin.common.dto.ListResponseDTO;
 import com.petcam.admin.dto.board.BoardDTO;
+import com.petcam.admin.dto.board.BoardInsertRequestDTO;
 import com.petcam.admin.dto.board.BoardListDTO;
 import com.petcam.admin.dto.board.BoardListRequestDTO;
 import com.petcam.admin.entity.board.Board;
 
 public interface BoardService {
+
+    
 
     ListResponseDTO<BoardListDTO> getList(BoardListRequestDTO requestDTO);
 
