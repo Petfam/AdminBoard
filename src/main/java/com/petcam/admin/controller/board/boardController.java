@@ -22,6 +22,9 @@ public class boardController {
 
     @GetMapping("/list")
     public ResponseEntity<ListResponseDTO<BoardListDTO>> list(@RequestBody BoardListRequestDTO requestDTO) {
+
+        log.info("==========================================");
+
         return ResponseEntity.ok(boardService.getList(requestDTO));
     }
 
