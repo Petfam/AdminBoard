@@ -12,6 +12,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.HashSet;
 import java.util.Optional;
@@ -29,9 +30,13 @@ public class BoardRepositorysTests {
     @Autowired
     UploadRepository uploadRepository;
 
+    @Test
+    public void testBoardSelect() {
+
+    }
 
     @Test
-    public void insert() {
+    public void testBoardAndPicInsert() {
 
         BoardImage img = BoardImage.builder()
                 .uuid("1")
@@ -100,9 +105,10 @@ public class BoardRepositorysTests {
     }
 
     @Test
+    @Transactional
     public void testSelect() {
 
-        Optional<Board> result = boardRepositorys.findById(2L);
+        Optional<Board> result = boardRepositorys.findById(5024L);
         log.info(result);
 
     }

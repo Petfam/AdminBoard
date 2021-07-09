@@ -4,6 +4,7 @@ import com.petcam.admin.common.dto.ListResponseDTO;
 import com.petcam.admin.dto.board.BoardInsertRequestDTO;
 import com.petcam.admin.dto.board.BoardListDTO;
 import com.petcam.admin.dto.board.BoardListRequestDTO;
+import com.petcam.admin.dto.board.BoardResponseDTO;
 import com.petcam.admin.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -37,6 +38,21 @@ public class BoardController {
         Long bno = boardService.boardInsert(requestDTO);
 
         return ResponseEntity.ok(bno);
+    }
+
+    @GetMapping("/select/{bno}")
+    public ResponseEntity<BoardResponseDTO> boardSelect(@PathVariable Long bno) {
+
+        log.info("============= board Select");
+
+        return ResponseEntity.ok(boardService.boardSelect(bno));
+    }
+
+    @GetMapping("/update/{bno}")
+    public ResponseEntity<Long> boardUpdate(@PathVariable Long bno) {
+        log.info("======= board update");
+
+        return ResponseEntity.ok(boardService.boardUpdate(bno));
     }
 
 

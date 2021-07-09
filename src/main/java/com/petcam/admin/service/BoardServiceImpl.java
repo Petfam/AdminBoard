@@ -2,10 +2,7 @@ package com.petcam.admin.service;
 
 import com.petcam.admin.common.dto.ListResponseDTO;
 import com.petcam.admin.common.dto.PagingDTO;
-import com.petcam.admin.dto.board.BoardDTO;
-import com.petcam.admin.dto.board.BoardInsertRequestDTO;
-import com.petcam.admin.dto.board.BoardListDTO;
-import com.petcam.admin.dto.board.BoardListRequestDTO;
+import com.petcam.admin.dto.board.*;
 import com.petcam.admin.entity.board.Board;
 import com.petcam.admin.entity.board.BoardImage;
 import com.petcam.admin.repository.board.BoardRepositorys;
@@ -17,7 +14,10 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,6 +26,39 @@ import java.util.stream.Collectors;
 public class BoardServiceImpl implements BoardService {
 
     private final BoardRepositorys boardRepositorys;
+
+    @Override
+    //UPDATEREQDO로 바꺼ㅝ야함
+    public Long boardUpdate(Long bno) {
+
+        Optional<Board> result = boardRepositorys.findById(bno);
+
+        if(result.isPresent()) {
+            Board board = result.get();
+            boardRepositorys.save(board);
+            return board.getBno();
+        }
+
+        return null;
+    }
+
+    @Override
+    public BoardResponseDTO boardSelect(Long bno) {
+
+        log.info("===================== boardSelect Start");
+
+        Optional<Board> result = boardRepositorys.findById(bno);
+
+        BoardResponseDTO dto = null;
+
+        if(result.isPresent()) {
+            Board board = result.get();
+            dto = entityToDTOForBoardResponse(board);
+
+        }
+
+        return dto;
+    }
 
     @Override
     public Long boardInsert(BoardInsertRequestDTO requestDTO) {

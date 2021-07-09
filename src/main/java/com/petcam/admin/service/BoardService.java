@@ -1,14 +1,22 @@
 package com.petcam.admin.service;
 
 import com.petcam.admin.common.dto.ListResponseDTO;
-import com.petcam.admin.dto.board.BoardDTO;
-import com.petcam.admin.dto.board.BoardInsertRequestDTO;
-import com.petcam.admin.dto.board.BoardListDTO;
-import com.petcam.admin.dto.board.BoardListRequestDTO;
+import com.petcam.admin.dto.board.*;
+import com.petcam.admin.dto.reply.ReplyDTO;
 import com.petcam.admin.entity.board.Board;
 import com.petcam.admin.entity.board.BoardImage;
 
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+import java.util.stream.Collectors;
+
 public interface BoardService {
+
+    Long boardUpdate(Long bno);
+
+    BoardResponseDTO boardSelect(Long bno);
 
     Long boardInsert(BoardInsertRequestDTO requestDTO);
 
@@ -39,19 +47,31 @@ public interface BoardService {
                 .build();
     }
 
-    default Board dtoToEntity(BoardDTO dto) {
-        Board board =  Board.builder()
-                .bno(dto.getBno())
-                .type(dto.getType())
-                .category(dto.getType())
-                .title(dto.getTitle())
-                .content(dto.getContent())
-                .writer(dto.getWriter())
-                .hit(dto.getHit())
-                .build();
+    default BoardResponseDTO entityToDTOForBoardResponse(Board board) {
 
-        return board;
-    }
+        List<BoardImage> imgList = new ArrayList<>(board.getBoardImages());
+        List<ReplyDTO> replyList = new ArrayList<>();
+
+        board.getBoardImages();
+
+        List<BoardImageDTO> resDTO = imgList.stream().map(boardImage -> BoardImageDTO.builder()
+                    .uuid(boardImage.getUuid())
+                    .filename(boardImage.getFilename())
+                    .main(boardImage.isMain())
+                .build()).collect(Collectors.toList());
+
+        return BoardResponseDTO.builder()
+                .bno(board.getBno())
+                .type(board.getType())
+                .title(board.getTitle())
+                .content(board.getContent())
+                .writer(board.getWriter())
+                .hit(board.getHit())
+                .modDate(board.getModDate())
+                .boardDTOImages(resDTO)
+                .boardDTOReplys(replyList)
+                .build();
+    };
 
     default Board dtoToEntityForInsert(BoardInsertRequestDTO dto) {
         Board board = Board.builder()
