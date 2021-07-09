@@ -1,13 +1,13 @@
 package com.petcam.admin.dto.board;
 
-import com.petcam.admin.dto.upload.UploadResultDTO;
+import com.petcam.admin.entity.board.BoardImage;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.w3c.dom.stylesheets.LinkStyle;
 
 import java.util.List;
+import java.util.Set;
 
 @Data
 @Builder
@@ -23,8 +23,6 @@ public class BoardInsertRequestDTO {
 
     private String writer;
 
-    private List<String> uuid;
-
-    private List<String> filename;
+    private Set<BoardImage> boardImages;
 
 }

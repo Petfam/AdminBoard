@@ -8,6 +8,7 @@ import com.petcam.admin.dto.board.BoardListRequestDTO;
 import com.petcam.admin.entity.board.Board;
 import com.petcam.admin.entity.board.BoardImage;
 import com.petcam.admin.repository.board.BoardRepositorys;
+import com.petcam.admin.repository.upload.UploadRepository;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
 import org.springframework.data.domain.Page;
@@ -34,9 +35,7 @@ public class BoardServiceImpl implements BoardService {
                 .title(requestDTO.getTitle())
                 .content(requestDTO.getContent())
                 .writer(requestDTO.getWriter())
-                .build();
-
-        BoardImage boardImage = BoardImage.builder()
+                .boardImages(requestDTO.getBoardImages())
                 .build();
 
         boardRepositorys.save(board);

@@ -98,7 +98,7 @@ public class UploadController {
                 e.printStackTrace();
             }
             log.info("========트라이캐치 마지막 빌더쪽 들어옴");
-            result.add(UploadResultDTO.builder().uuid(uuid).fileName(fileName).build());
+            result.add(UploadResultDTO.builder().uuid(uuid).filename(fileName).build());
         }
 
         log.info(result + "==========결과======");

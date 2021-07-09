@@ -1,7 +1,9 @@
 package com.petcam.admin.board;
 
 import com.petcam.admin.entity.board.Board;
+import com.petcam.admin.entity.board.BoardImage;
 import com.petcam.admin.repository.board.BoardRepositorys;
+import com.petcam.admin.repository.upload.UploadRepository;
 import lombok.extern.log4j.Log4j2;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,7 +13,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.test.context.ActiveProfiles;
 
+import java.util.HashSet;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.IntStream;
 
 @SpringBootTest
@@ -21,6 +25,40 @@ public class BoardRepositorysTests {
 
     @Autowired
     BoardRepositorys boardRepositorys;
+
+    @Autowired
+    UploadRepository uploadRepository;
+
+
+    @Test
+    public void insert() {
+
+        BoardImage img = BoardImage.builder()
+                .uuid("880")
+                .filename("456")
+                .main(false)
+                .build();
+
+        BoardImage img2 = BoardImage.builder()
+                .uuid("456")
+                .filename("456")
+                .main(false)
+                .build();
+
+
+        Board board = Board.builder()
+                .type("N")
+                .title("제목1")
+                .content("내용1")
+                .writer("쓴사람1")
+                .build();
+
+        board.addImage(img);
+        board.addImage(img2);
+
+        boardRepositorys.save(board);
+
+    }
 
     //제목, 내용, 작성자, 게시판 타입을 통해 페이징 처리 된 게시물 목록 및 댓글 갯수 호출
     @Test
