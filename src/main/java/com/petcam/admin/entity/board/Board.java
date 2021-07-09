@@ -1,10 +1,12 @@
 package com.petcam.admin.entity.board;
 
 import com.petcam.admin.common.entity.BaseEntity;
+import com.petcam.admin.entity.reply.Reply;
 import lombok.*;
 
 import javax.persistence.*;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -33,6 +35,7 @@ public class Board extends BaseEntity {
 
     private Long hit;
 
+
     @Builder.Default
     @OneToMany(cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<BoardImage> boardImages = new HashSet<>();
@@ -52,5 +55,8 @@ public class Board extends BaseEntity {
                 .collect(Collectors.toSet());
     }
 
+
+    @OneToMany(mappedBy = "board", fetch = FetchType.LAZY)
+    private List<Reply> replies;
 
 }

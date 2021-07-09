@@ -7,7 +7,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ReplyRepository extends JpaRepository<Reply, Long> {
-    Page<Reply> getByBoard(Board board, Pageable pageable);
+    Page<Reply> getBy (Board board, Pageable pageable);
     //어디에있는지 가져온는거
 
 
