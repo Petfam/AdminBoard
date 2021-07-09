@@ -6,6 +6,7 @@ import com.petcam.admin.dto.board.BoardInsertRequestDTO;
 import com.petcam.admin.dto.board.BoardListDTO;
 import com.petcam.admin.dto.board.BoardListRequestDTO;
 import com.petcam.admin.entity.board.Board;
+import com.petcam.admin.entity.board.BoardImage;
 import com.petcam.admin.repository.board.BoardRepositorys;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -23,6 +24,26 @@ import java.util.stream.Collectors;
 public class BoardServiceImpl implements BoardService {
 
     private final BoardRepositorys boardRepositorys;
+
+    public Long boardInsert(BoardInsertRequestDTO requestDTO) {
+
+        log.info("======================== boardInsert Start");
+
+        Board board = Board.builder()
+                .type("N")
+                .title(requestDTO.getTitle())
+                .content(requestDTO.getContent())
+                .writer(requestDTO.getWriter())
+                .build();
+
+        BoardImage boardImage = BoardImage.builder()
+                .build();
+
+        boardRepositorys.save(board);
+
+        return board.getBno();
+
+    }
 
     @Override
     public ListResponseDTO<BoardListDTO> getList(BoardListRequestDTO requestDTO) {

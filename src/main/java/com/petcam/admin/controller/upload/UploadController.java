@@ -17,6 +17,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.nio.file.Files;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.UUID;
 
@@ -74,6 +75,8 @@ public class UploadController {
             File outFile = new File(path, uuid+"_"+fileName );
             File thumbFile = new File(path, "s_"+uuid+"_"+fileName );
 
+            //List<String> uuidList = Arrays.asList(uuid);
+
             try {
                 log.info("========트라이들어옴");
                 InputStream fin = file.getInputStream(); //< -- 변경
@@ -94,7 +97,7 @@ public class UploadController {
                 e.printStackTrace();
             }
             log.info("========트라이캐치 마지막 빌더쪽 들어옴");
-            result.add(UploadResultDTO.builder().uuid(uuid).fileName(fileName).build());
+            result.add(UploadResultDTO.builder().uuid(uuid).filename(fileName).build());
         }//end for
 
         log.info(result + "==========결과======");

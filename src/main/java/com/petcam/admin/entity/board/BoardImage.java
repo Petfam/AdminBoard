@@ -17,11 +17,11 @@ public class BoardImage {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long ppno;
+    private Long bpno;
 
-    private String ppfileName;
+    private String uuid;
 
-
+    private String filename;
 
 }
 
