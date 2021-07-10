@@ -93,7 +93,7 @@ public class BoardRepositorysTests {
             long randomHit = (int)(Math.random() * 1000 + 1);
             Board board = Board.builder()
                     .type("N")
-                    .category("공지사항"+i)
+                    .category("카테고리"+i)
                     .title("제목"+i)
                     .content("내용"+i)
                     .writer("관리자")

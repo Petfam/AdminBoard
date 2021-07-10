@@ -28,18 +28,20 @@ public class BoardServiceImpl implements BoardService {
     private final BoardRepositorys boardRepositorys;
 
     @Override
-    //UPDATEREQDO로 바꺼ㅝ야함
-    public Long boardUpdate(Long bno) {
+    public Long boardDelete(Long bno) {
 
-        Optional<Board> result = boardRepositorys.findById(bno);
+        boardRepositorys.deleteById(bno);
 
-        if(result.isPresent()) {
-            Board board = result.get();
+        return bno;
+    }
+
+    @Override
+    public Long boardUpdate(BoardUpdateReqDTO updateReqDTO) {
+
+            Board board = dtoToEntityForBoardUpdate(updateReqDTO);
             boardRepositorys.save(board);
             return board.getBno();
-        }
 
-        return null;
     }
 
     @Override

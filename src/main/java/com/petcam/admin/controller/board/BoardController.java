@@ -1,10 +1,7 @@
 package com.petcam.admin.controller.board;
 
 import com.petcam.admin.common.dto.ListResponseDTO;
-import com.petcam.admin.dto.board.BoardInsertRequestDTO;
-import com.petcam.admin.dto.board.BoardListDTO;
-import com.petcam.admin.dto.board.BoardListRequestDTO;
-import com.petcam.admin.dto.board.BoardResponseDTO;
+import com.petcam.admin.dto.board.*;
 import com.petcam.admin.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -48,11 +45,18 @@ public class BoardController {
         return ResponseEntity.ok(boardService.boardSelect(bno));
     }
 
-    @GetMapping("/update/{bno}")
-    public ResponseEntity<Long> boardUpdate(@PathVariable Long bno) {
+    @PutMapping("/update")
+    public ResponseEntity<Long> boardUpdate(@RequestBody BoardUpdateReqDTO updateReqDTO) {
         log.info("======= board update");
 
-        return ResponseEntity.ok(boardService.boardUpdate(bno));
+        return ResponseEntity.ok(boardService.boardUpdate(updateReqDTO));
+    }
+
+    @DeleteMapping("/delete/{bno}")
+    public ResponseEntity<Long> boardDelete(@PathVariable Long bno) {
+        log.info("====== board delete");
+
+        return ResponseEntity.ok(boardService.boardDelete(bno));
     }
 
 

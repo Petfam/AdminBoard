@@ -14,7 +14,9 @@ import java.util.stream.Collectors;
 
 public interface BoardService {
 
-    Long boardUpdate(Long bno);
+    Long boardDelete(Long bno);
+
+    Long boardUpdate(BoardUpdateReqDTO updateReqDTO);
 
     BoardResponseDTO boardSelect(Long bno);
 
@@ -44,6 +46,27 @@ public interface BoardService {
                 .hit(board.getHit())
                 .regDate(board.getRegDate())
                 .modDate(board.getModDate())
+                .build();
+    }
+
+    default Board dtoToEntityForBoardUpdate(BoardUpdateReqDTO dto) {
+
+        List<BoardImageDTO> imgList = new ArrayList<>(dto.getBoardDTOImages());
+
+        Set<BoardImage> updateResDTO = imgList.stream().map(boardImageDTO ->
+                BoardImage.builder()
+                        .uuid((boardImageDTO.getUuid()))
+                        .filename(boardImageDTO.getFilename())
+                        .main(boardImageDTO.isMain())
+                        .build())
+                .collect(Collectors.toSet());
+
+        return Board.builder()
+                .bno(dto.getBno())
+                .type(dto.getType())
+                .title(dto.getTitle())
+                .content(dto.getContent())
+                .boardImages(updateResDTO)
                 .build();
     }
 

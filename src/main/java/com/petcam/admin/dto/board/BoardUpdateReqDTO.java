@@ -13,6 +13,8 @@ import java.util.List;
 @NoArgsConstructor
 public class BoardUpdateReqDTO {
 
+    private Long bno;
+
     private String type;
 
     private String title;
