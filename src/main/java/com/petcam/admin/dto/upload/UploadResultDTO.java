@@ -2,6 +2,8 @@ package com.petcam.admin.dto.upload;
 
 import lombok.*;
 
+import java.util.List;
+
 @Data
 @ToString
 @Builder
@@ -10,5 +12,9 @@ import lombok.*;
 public class UploadResultDTO {
 
     private String uuid;
-    private String fileName;
+
+    private String filename;
+
+    //둘 다 리스트
+
 }

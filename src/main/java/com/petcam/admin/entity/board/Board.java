@@ -50,7 +50,7 @@ public class Board extends BaseEntity {
 
     public void removeImage(Long ino) {
         boardImages = boardImages.stream()
-                .filter(bi -> bi.getPpno().equals(ino) == false)
+                .filter(bi -> bi.getBpno().equals(ino) == false)
                 //새로 들어온 이미지 넘버와 안에있는 번호를 비교해서 틀리면 toset 새로 집어넣는다..?
                 .collect(Collectors.toSet());
     }
