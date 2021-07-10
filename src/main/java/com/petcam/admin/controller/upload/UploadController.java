@@ -28,7 +28,6 @@ public class UploadController {
     @Value("C:\\Users\\AIA")
     private String path;
 
-    //
     @ResponseBody
     @GetMapping(value = "/down")
     public ResponseEntity<byte[]> down(String file){

@@ -21,6 +21,8 @@ public class ReplyDTO {
 
     private String rwriter;
 
+    private Long bno;
+
     private LocalDateTime regDate;
 
     private  LocalDateTime modDate;
