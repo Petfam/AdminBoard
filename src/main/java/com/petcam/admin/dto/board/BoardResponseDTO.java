@@ -1,6 +1,7 @@
 package com.petcam.admin.dto.board;
 
 import com.petcam.admin.dto.reply.ReplyDTO;
+import com.petcam.admin.dto.reply.ReplyResDTO;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -31,6 +32,6 @@ public class BoardResponseDTO {
 
     private List<BoardImageDTO> boardDTOImages;
 
-    private List<ReplyDTO> boardDTOReplys;
+    private List<ReplyResDTO> boardDTOReplys;
 
 }

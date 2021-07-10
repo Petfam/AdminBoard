@@ -3,8 +3,10 @@ package com.petcam.admin.service;
 import com.petcam.admin.common.dto.ListResponseDTO;
 import com.petcam.admin.dto.board.*;
 import com.petcam.admin.dto.reply.ReplyDTO;
+import com.petcam.admin.dto.reply.ReplyResDTO;
 import com.petcam.admin.entity.board.Board;
 import com.petcam.admin.entity.board.BoardImage;
+import com.petcam.admin.entity.reply.Reply;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -13,6 +15,8 @@ import java.util.Set;
 import java.util.stream.Collectors;
 
 public interface BoardService {
+
+//    void increaseHit(Long bno);
 
     Long boardDelete(Long bno);
 
@@ -70,12 +74,9 @@ public interface BoardService {
                 .build();
     }
 
-    default BoardResponseDTO entityToDTOForBoardResponse(Board board) {
+    default BoardResponseDTO entityToDTOForBoardResponse(Board board, List<ReplyResDTO> replyList) {
 
         List<BoardImage> imgList = new ArrayList<>(board.getBoardImages());
-        List<ReplyDTO> replyList = new ArrayList<>();
-
-        board.getBoardImages();
 
         List<BoardImageDTO> resDTO = imgList.stream().map(boardImage -> BoardImageDTO.builder()
                     .uuid(boardImage.getUuid())

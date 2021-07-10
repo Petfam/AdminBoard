@@ -2,6 +2,7 @@ package com.petcam.admin.controller.board;
 
 import com.petcam.admin.common.dto.ListResponseDTO;
 import com.petcam.admin.dto.board.*;
+import com.petcam.admin.repository.board.BoardRepositorys;
 import com.petcam.admin.service.BoardService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 public class BoardController {
 
     private final BoardService boardService;
+    private final BoardRepositorys boardRepositorys;
 
     @GetMapping("/list")
     public ResponseEntity<ListResponseDTO<BoardListDTO>> list(@RequestBody BoardListRequestDTO requestDTO) {
@@ -41,7 +43,7 @@ public class BoardController {
     public ResponseEntity<BoardResponseDTO> boardSelect(@PathVariable Long bno) {
 
         log.info("============= board Select");
-
+        boardRepositorys.increaseHit(bno);
         return ResponseEntity.ok(boardService.boardSelect(bno));
     }
 
@@ -58,6 +60,5 @@ public class BoardController {
 
         return ResponseEntity.ok(boardService.boardDelete(bno));
     }
-
 
 }

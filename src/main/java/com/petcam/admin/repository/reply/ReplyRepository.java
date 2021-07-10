@@ -1,14 +1,18 @@
 package com.petcam.admin.repository.reply;
 
-import com.petcam.admin.entity.board.Board;
+import com.petcam.admin.dto.reply.ReplyResDTO;
 import com.petcam.admin.entity.reply.Reply;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+
+import java.util.List;
 
 public interface ReplyRepository extends JpaRepository<Reply, Long> {
-    Page<Reply> getByBoard(Board board, Pageable pageable);
-    //어디에있는지 가져온는거
 
+    @Query("select r.rno, r.rcontent, r.rwriter, r.modDate " +
+            " from Reply r " +
+            " where r.board.bno = :bno and r.board.bno > 0")
+    List<Object[]> getByBoard(Long bno);
+    //reply get from bno
 
 }
